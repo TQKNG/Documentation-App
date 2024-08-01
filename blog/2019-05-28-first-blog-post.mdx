@@ -2,5 +2,51 @@
 slug: first-blog-post
 title: GET Telemetry
 ---
+
 The API aims to retrieve temperature telemetry from all the devices
 
+## Authentication
+
+To access the API, you need to authenticate using a token. Here’s how you include the token in your requests:
+
+
+## Endpoints
+
+`/api/v1/temperature?{clientID}`
+
+**Method:** <span className="method-get">GET</span>
+
+**Description:** Retrieves temperature by clientID.
+
+**Request Example:**
+
+```http
+GET /api/v1/temperature?clientID = 123
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "client_id": 123,
+    "temperature": 10,
+    "DateTimeStamp": 2024-07-03 14:35:05
+  },
+  {
+    "id": 2,
+    "client_id": 123,
+    "temperature": 15,
+    "DateTimeStamp": 2024-07-03 14:40:00
+  },
+]
+
+```
+
+
+**Status Codes:**
+
+- <span className="method-get">200</span> OK - Successful request
+- <span className="method-delete">404</span> Not Found - User not found
