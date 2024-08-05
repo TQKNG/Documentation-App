@@ -1,6 +1,10 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { Options } from 'docusaurus-preset-openapi';
+
+
+
 
 const config: Config = {
   title: 'Virbrix Developer Docs',
@@ -47,13 +51,49 @@ const config: Config = {
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
+        
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
     ],
+    // [
+    //   "docusaurus-preset-openapi",
+    //   {
+    //     api: {
+    //       sidebarPath: require.resolve("./sidebars.ts"),
+    //       routeBasePath: "/api",
+    //     },
+    //     docs: {
+    //       sidebarPath: require.resolve("./sidebars.ts"),
+    //       routeBasePath: "/",
+    //     },
+    //     theme: {
+    //       customCss: require.resolve("./src/css/custom.css"),
+    //     },
+    //   },
+    // ],
   ],
-
+  plugins: [
+    // [
+    //   'docusaurus-plugin-openapi',
+    //   {
+    //     id: 'trains',
+    //     path: 'trains/openapi.json',
+    //     routeBasePath: 'trains',
+    //     // ... other options
+    //   },
+    // ],
+    // [
+    //   'docusaurus-plugin-openapi',
+    //   {
+    //     id: 'bikes',
+    //     path: 'bikes/openapi.json',
+    //     routeBasePath: 'bikes',
+    //     // ... other options
+    //   },
+    // ],
+  ],
   themeConfig: {
     // Replace with your project's social card
     image: 'img/virbrix-social-card.png',
@@ -71,6 +111,7 @@ const config: Config = {
           label: 'Guides',
         },
         {to: '/blog', label: 'API Reference', position: 'left'},
+        {to: '/api', label: 'API (Test)', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
@@ -121,7 +162,7 @@ const config: Config = {
         //   ],
         // },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Virbrix, Inc.`,
+      copyright: `Copyright © ${new Date().getFullYear()} GlobalDWS`,
     },
     prism: {
       theme: prismThemes.github,
