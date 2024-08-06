@@ -5,7 +5,7 @@ import type { Options } from 'docusaurus-preset-openapi';
 
 
 
-
+/** @type {import('@docusaurus/types').Config} */
 const config: Config = {
   title: 'Virbrix Developer Docs',
   tagline: 'Documentation for Virbrix API and SDK',
@@ -35,7 +35,8 @@ const config: Config = {
 
   presets: [
     [
-      'classic',
+      "docusaurus-preset-openapi",
+      /** @type {import('docusaurus-preset-openapi').Options} */
       {
         docs: {
           sidebarPath: './sidebars.ts',
@@ -110,8 +111,7 @@ const config: Config = {
           position: 'left',
           label: 'Guides',
         },
-        {to: '/blog', label: 'API Reference', position: 'left'},
-        {to: '/api', label: 'API (Test)', position: 'left'},
+        {to: '/api', label: 'API', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
