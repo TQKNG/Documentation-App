@@ -9,7 +9,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:3000/api/v1/health-and-safety"
+        "url": "https://stgvirbrix.azurewebsites.net/api/v1/health-and-safety"
       }
     ],
     "paths": {
