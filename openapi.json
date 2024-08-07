@@ -9,30 +9,30 @@
     },
     "servers": [
       {
-        "url": "https://trinityvillagedev.azurewebsites.net/api/robotservices"
+        "url": "http://localhost:3000/api/v1/health-and-safety"
       }
     ],
     "paths": {
-      "/schedules": {
+      "/temperature/{client_id}": {
         "get": {
-          "summary": "List all active schedules",
-          "operationId": "listSchedules",
-          "tags": ["schedules"],
+          "summary": "🔹[GET] Temperature by Client",
+          "operationId": "getTemperatures",
+          "tags": ["Health and Safety"],
           "parameters": [
             {
-              "name": "limit",
-              "in": "query",
-              "description": "How many items to return at one time (max 100)",
-              "required": false,
+              "name": "client_id",
+              "in": "path",
+              "description": "Please provide the client ID",
+              "required": true,
               "schema": {
                 "type": "integer",
-                "format": "int32"
+                "enum": [1, 29]
               }
             }
           ],
           "responses": {
-            "200": {
-              "description": "The schedules for service",
+            "🟢 200": {
+              "description": "Successful Response",
               "headers": {
                 "x-next": {
                   "description": "A link to the next page of responses",
@@ -43,108 +43,317 @@
               },
               "content": {
                 "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Pets"
-                  }
+                 "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Temperatures"
+                    }
+                  },
+                  "required": ["success", "data"]
+                }
                 }
               }
             },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
+           "🔴 400": {
+              "description": "Bad Request - The request could not be understood or was missing required parameters.",
+              "headers": {
+                "x-error-code": {
+                  "description": "An error code representing the specific issue.",
                   "schema": {
-                    "$ref": "#/components/schemas/Error"
+                    "type": "string"
                   }
                 }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a schedule",
-          "operationId": "createPets",
-          "tags": ["schedules"],
-          "responses": {
-            "201": {
-              "description": "Null response"
-            },
-            "default": {
-              "description": "unexpected error",
+              },
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "error": {
+                      "type":"string",
+                      "example": "Error messages"}
+                  },
+                  "required": ["success", "error"]
+
+                }
                 }
               }
             }
           }
         }
       },
-      "/pets/{petId}": {
+      "/light/{client_id}": {
         "get": {
-          "summary": "Get schedule by ID",
-          "operationId": "showPetById",
-          "tags": ["schedules"],
+          "summary": "🔹[GET]  Light by Client",
+          "operationId": "getLight",
+          "tags": ["Health and Safety"],
           "parameters": [
             {
-              "name": "petId",
+              "name": "client_id",
               "in": "path",
+              "description": "Please provide the client ID",
               "required": true,
-              "description": "The id of the pet to retrieve",
               "schema": {
-                "type": "string"
+                "type": "integer",
+                "enum": [1, 29]
               }
             }
           ],
           "responses": {
-            "200": {
-              "description": "Expected response to a valid request",
+            "🟢 200": {
+              "description": "Successful Response",
+              "headers": {
+                "x-next": {
+                  "description": "A link to the next page of responses",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
               "content": {
                 "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Pet"
-                  }
+                 "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Temperatures"
+                    }
+                  },
+                  "required": ["success", "data"]
+                }
                 }
               }
             },
-            "default": {
-              "description": "unexpected error",
+           "🔴 400": {
+              "description": "Bad Request - The request could not be understood or was missing required parameters.",
+              "headers": {
+                "x-error-code": {
+                  "description": "An error code representing the specific issue.",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "error": {
+                      "type":"string",
+                      "example": "Error messages"}
+                  },
+                  "required": ["success", "error"]
+
+                }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/noise/{client_id}": {
+        "get": {
+          "summary": "🔹[GET]  Noise by Client",
+          "operationId": "getNoise",
+          "tags": ["Health and Safety"],
+          "parameters": [
+            {
+              "name": "client_id",
+              "in": "path",
+              "description": "Please provide the client ID",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "enum": [1, 29]
+              }
+            }
+          ],
+          "responses": {
+            "🟢 200": {
+              "description": "Successful Response",
+              "headers": {
+                "x-next": {
+                  "description": "A link to the next page of responses",
+                  "schema": {
+                    "type": "string"
                   }
+                }
+              },
+              "content": {
+                "application/json": {
+                 "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Temperatures"
+                    }
+                  },
+                  "required": ["success", "data"]
+                }
+                }
+              }
+            },
+           "🔴 400": {
+              "description": "Bad Request - The request could not be understood or was missing required parameters.",
+              "headers": {
+                "x-error-code": {
+                  "description": "An error code representing the specific issue.",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "error": {
+                      "type":"string",
+                      "example": "Error messages"}
+                  },
+                  "required": ["success", "error"]
+
+                }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/o3/{client_id}": {
+        "post": {
+          "summary": "🔶[POST] Ozone by Client",
+          "operationId": "addOzone",
+          "tags": ["Health and Safety"],
+          "parameters": [
+            {
+              "name": "client_id",
+              "in": "path",
+              "description": "Please provide the client ID",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "enum": [1, 29]
+              }
+            }
+          ],
+          "responses": {
+            "🟢 200": {
+              "description": "Successful Response",
+              "headers": {
+                "x-next": {
+                  "description": "A link to the next page of responses",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                 "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Temperatures"
+                    }
+                  },
+                  "required": ["success", "data"]
+                }
+                }
+              }
+            },
+           "🔴 400": {
+              "description": "Bad Request - The request could not be understood or was missing required parameters.",
+              "headers": {
+                "x-error-code": {
+                  "description": "An error code representing the specific issue.",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "error": {
+                      "type":"string",
+                      "example": "Error messages"}
+                  },
+                  "required": ["success", "error"]
+
+                }
                 }
               }
             }
           }
         }
       }
+
     },
     "components": {
       "schemas": {
-        "Pet": {
+        "Temperature": {
           "type": "object",
-          "required": ["id", "name"],
           "properties": {
-            "id": {
+            "client_id": {
               "type": "integer",
               "format": "int64"
             },
-            "name": {
+            "client_name": {
               "type": "string"
             },
-            "tag": {
+            "device_name": {
               "type": "string"
+            },
+            "enqueuedTime_Stamp": {
+              "type": "string"
+            },
+            "temperature": {
+              "type": "integer"
             }
           }
         },
-        "Pets": {
+        "Temperatures": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/Pet"
+            "$ref": "#/components/schemas/Temperature"
           }
         },
         "Error": {

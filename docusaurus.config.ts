@@ -113,7 +113,7 @@ const config: Config = {
         },
         {to: '/api', label: 'API', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/globaldws/VirBrix',
           label: 'GitHub',
           position: 'right',
         },
